@@ -10,7 +10,6 @@ class QuakeAPI extends RESTDataSource {
     const query =
       'query?format=geojson&starttime=2014-01-01&endtime=2014-01-02';
     const response = await this.get(query);
-    console.log(response.features[0]);
     return Array.isArray(response.features)
       ? response.features.map((quake) => this.quakeReducer(quake))
       : [];
@@ -49,7 +48,7 @@ class QuakeAPI extends RESTDataSource {
       magnitude: quake.properties.mag,
       location: quake.properties.place,
       when: datestring,
-      time: timestamp,
+      cursor: timestamp,
       id: quake.id,
     };
   }
